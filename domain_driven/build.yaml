@@ -1,0 +1,23 @@
+targets:
+  $default:
+    builders:
+      # Perhatikan penulisan nama builder: freezed|freezed atau freezed:freezed
+      freezed:freezed:
+        generate_for:
+          - lib/models/*.dart
+        options:
+          build_extensions:
+            '^lib/models/{{file}}.dart': 'lib/models/generated/{{file}}.freezed.dart'
+      
+      json_serializable:
+        generate_for:
+          - lib/models/*.dart
+        options:
+          explicit_to_json: true
+
+      source_gen|combining_builder:
+        generate_for:
+          - lib/models/*.dart
+        options:
+          build_extensions:
+            '^lib/models/{{file}}.dart': 'lib/models/generated/{{file}}.g.dart'
