@@ -47,7 +47,7 @@ class ProductStore extends GetxController {
       var maxPixel = scrollController.position.maxScrollExtent;
 
       if (pixel == maxPixel) {
-        if (data.length <= totalData.value) {
+        if (data.length < totalData.value) {
           pagination['page'] += 1;
           pagination['skip'] = pagination['limit'] * (pagination['page'] - 1);
 
