@@ -1,3 +1,18 @@
+import java.util.Base64
+
+// Fungsi pembantu untuk mengambil dart-defines
+val dartEnvironmentVariables = mutableMapOf<String, String>()
+if (project.hasProperty("dart-defines")) {
+    val dartDefines = project.property("dart-defines") as String
+    dartDefines.split(",").forEach {
+        val decoded = String(Base64.getDecoder().decode(it))
+        val pair = decoded.split("=")
+        if (pair.size == 2) {
+            dartEnvironmentVariables[pair[0]] = pair[1]
+        }
+    }
+}
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -20,8 +35,8 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.with_get_x"
+        val appIdSuffix = dartEnvironmentVariables["APP_ID_SUFFIX"] ?: ""
+        applicationId = "com.btj.$appIdSuffix"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

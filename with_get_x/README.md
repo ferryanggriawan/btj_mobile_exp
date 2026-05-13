@@ -7,3 +7,12 @@
 ## API
 menggunakan API: https://dummyjson.com/docs/products#products-all
 
+## Run dengan mode debug
+flutter run --dart-define-from-file=config/env_dev.json
+
+## Run dengan mode release
+### Untuk Android APK
+flutter build apk --dart-define-from-file=config/env_prod.json
+
+### Untuk iOS
+flutter build ios --dart-define-from-file=config/env_prod.json
